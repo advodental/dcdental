@@ -1,10 +1,10 @@
 lib = File.expand_path("lib", __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "dcddental/version"
+require "dcdental/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "dcddental"
-  spec.version       = Dcddental::VERSION
+  spec.name          = "dcdental"
+  spec.version       = Dcdental::VERSION
   spec.authors       = ["Leo Brigadin"]
   spec.email         = ["leo@hyperiq.com"]
 
