@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
-require "dcdental/version"
-require "dcdental/client"
-require "dcdental/configuration"
+require_relative "dcdental/version"
+require_relative "dcdental/api"
+require_relative "dcdental/client"
+require_relative "dcdental/configuration"
 
 module Dcdental
   class << self
@@ -15,6 +16,10 @@ module Dcdental
 
   def self.reset
     @configuration = Configuration.new
+  end
+
+  def new
+    Dcdental::Client.new
   end
 
   def self.configure
