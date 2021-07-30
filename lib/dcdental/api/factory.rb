@@ -2,9 +2,11 @@
 
 module Dcdental
   class API
+    # factory to create instance of API namespaces
     class Factory
       def self.new(klass)
-        raise ArgumentError, "must provide API class to be instantiated" unless klass
+        raise ArgumentError, 'must provide API class to be instantiated' unless klass
+
         create_instance(klass)
       end
 

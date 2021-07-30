@@ -1,10 +1,20 @@
-require "test_helper"
-require "dcdental/client"
+# frozen_string_literal: true
 
-class Dcdental::ClientTest < Minitest::Test
-  def test_that_auth_defined
-    client = Dcdental::Client.new
+require 'test_helper'
+require 'dcdental/client'
 
-    assert client.respond_to? :auth
+module Dcdental
+  class ClientTest < Minitest::Test
+    def test_that_auth_defined
+      client = Dcdental::Client.new
+
+      assert client.respond_to? :auth
+    end
+
+    def test_that_customer_defined
+      client = Dcdental::Client.new
+
+      assert client.respond_to? :customer
+    end
   end
 end

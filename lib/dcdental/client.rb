@@ -1,10 +1,12 @@
 # frozen_string_literal: true
-require_relative "api"
 
+require_relative 'api'
+
+# API client
 module Dcdental
   class Client < API
-    require_relative "client/auth"
-    require_relative "client/customer"
+    require_relative 'namespace/auth'
+    require_relative 'namespace/customer'
 
     namespace :auth
     namespace :customer

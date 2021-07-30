@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Dcdental
+  # Dcdental Configuration
   class Configuration
     attr_accessor :consumer_key, :consumer_secret, :token_id, :token_secret, :base_url, :realm
 
@@ -15,7 +16,7 @@ module Dcdental
 
     def site
       uri = URI(@base_url)
-      scheme = uri.scheme || "https"
+      scheme = uri.scheme || 'https'
       "#{scheme}://#{uri.host}"
     end
   end

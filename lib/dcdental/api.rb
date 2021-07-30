@@ -1,16 +1,15 @@
 # frozen_string_literal: true
 
-require_relative "api/factory"
+require_relative 'api/factory'
 require_relative 'request'
 
 module Dcdental
+  # base class to get API namespaces
   class API
     include Dcdental::Request
 
     def self.namespace(name, options = {})
-      if public_method_defined?(name)
-        raise ArgumentError, "namespace '#{name}' is already defined"
-      end
+      raise ArgumentError, "namespace '#{name}' is already defined" if public_method_defined?(name)
 
       class_name = extract_class_name(name, options)
 
@@ -23,7 +22,7 @@ module Dcdental
     def self.extract_class_name(name, options)
       converted  = options.fetch(:full_name, name).to_s
       converted  = converted.split('_').map(&:capitalize).join
-      class_name = options.fetch(:root, false) ? '': "#{self.name}::"
+      class_name = options.fetch(:root, false) ? '' : 'Namespace::'
       class_name += converted
       class_name
     end
