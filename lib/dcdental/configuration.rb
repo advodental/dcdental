@@ -12,5 +12,11 @@ module Dcdental
       @base_url = nil
       @realm = nil
     end
+
+    def site
+      uri = URI(@base_url)
+      scheme = uri.scheme || "https"
+      "#{scheme}://#{uri.host}"
+    end
   end
 end
