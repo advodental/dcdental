@@ -178,40 +178,37 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 ## Configuration
 
 ```ruby
-
 Dcdental.configure  do |config|
-	config.realm = 'realm here'
-	config.consumer_key = 'consumer key here'
-	config.consumer_secret = 'consumer secret here'
-	config.token_id = 'token here'
-	config.token_secret = 'token secret here'
-	config.base_url = 'base url here'  # Production or Sandbox
+  config.realm = 'realm here'
+  config.consumer_key = 'consumer key here'
+  config.consumer_secret = 'consumer secret here'
+  config.token_id = 'token here'
+  config.token_secret = 'token secret here'
+  config.base_url = 'base url here'  # Production or Sandbox
 end
-
 ```
 
 ## Auth Endpoints
 
 ```ruby
-	client = Dcdental::Client.new
-	client.auth.get
+  client = Dcdental::Client.new
+  client.auth.get
 ```
 ### response: 
 ```json
-{"success"=>true, "result"=>{"id"=>113138, "name"=>"Services No Reply", "email"=>"services@dcdental.com", "location"=>0, "department"=>0, "role"=>1170, "roleId"=>"customrole_pri_rest_service", "roleCenter"=>"SYSADMINCENTER", "subsidiary"=>1}}
+{"success": true, "result": {"id": 113138, "name": "Services No Reply", "email": "services@dcdental.com", "location": 0, "department": 0, "role": 1170, "roleId": "customrole_pri_rest_service", "roleCenter": "SYSADMINCENTER", "subsidiary": 1}}
 ```
 ## Customer Endpoints
 ### Get customer:
 ```ruby
-	client = Dcdental::Client.new
-	client.customer.get({id})
+  client = Dcdental::Client.new
+  client.customer.get({id})
 ```
 ### response:
 ```json
-{"success"=>true, "result"=>[{"internalid"=>"1487367", "entityid"=>"ADVO", "email"=>"", "phone"=>"", "altphone"=>"", "fax"=>"", "contact"=>"", "altemail"=>""}]}
+{"success": true, "result": [{"internalid": "1487367", "entityid": "ADVO", "email": "", "phone": "", "altphone": "", "fax": "", "contact": "", "altemail": ""}]}
 ```
 ## Contributing
-
   
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/dcdental.
