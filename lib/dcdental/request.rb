@@ -9,9 +9,24 @@ module Dcdental
     include Headers
 
     def get_request(path, query_params)
-      uri = build_uri(path)
-      uri.query = URI.encode_www_form(query_params)
+      uri = build_uri(path, query_params)
       req = Net::HTTP::Get.new(uri)
+
+      make_request(req)
+    end
+
+    def post_request(path, body, query_params = nil)
+      uri = build_uri(path, query_params)
+      req = Net::HTTP::Post.new(uri)
+      req.body = normalize_keys(body).to_json if body
+
+      make_request(req)
+    end
+
+    def put_request(path, body, query_params = nil)
+      uri = build_uri(path, query_params)
+      req = Net::HTTP::Put.new(uri)
+      req.body = normalize_keys(body).to_json if body
 
       make_request(req)
     end
@@ -25,7 +40,7 @@ module Dcdental
     def process_response(response)
       case response
       when Net::HTTPSuccess
-        JSON.parse response.body
+        parse_success_response(response)
       when Net::HTTPUnauthorized
         { 'error' => "#{response.message}: username and password set and correct?" }
       when Net::HTTPServerError
@@ -35,8 +50,17 @@ module Dcdental
       end
     end
 
-    def build_uri(path)
-      URI(Dcdental.configuration.site + path)
+    def parse_success_response(response)
+      body = JSON.parse response.body
+      return { 'error' => (body['exception']).to_s } unless body['success']
+
+      body
+    end
+
+    def build_uri(path, query_params = nil)
+      uri = URI(Dcdental.configuration.site + path)
+      uri.query = URI.encode_www_form(normalize_keys(query_params)) if query_params
+      uri
     end
 
     private
@@ -47,6 +71,19 @@ module Dcdental
         http = Net::HTTP.new uri.host, uri.port
         http.use_ssl = true
         http
+      end
+    end
+
+    def normalize_keys(hash)
+      return {} unless hash
+
+      hash.each_with_object({}) do |(key, value), obj|
+        normalized_key = key.to_s.gsub('_', '').downcase
+        obj[normalized_key] = if value.is_a?(Hash)
+                                normalize_keys(value)
+                              else
+                                value
+                              end
       end
     end
   end

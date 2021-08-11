@@ -19,8 +19,8 @@ module Dcdental
     @configuration = Configuration.new
   end
 
-  def new
-    Dcdental::Client.new
+  def self.new
+    ::Dcdental::Client.new
   end
 
   def self.configure

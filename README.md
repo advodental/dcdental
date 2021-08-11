@@ -67,7 +67,7 @@ end
 ## Auth Endpoints
 
 ```ruby
-  client = Dcdental::Client.new
+  client = Dcdental::Client.new # or Dcdental.new
   client.auth.get
 ```
 ### response: 
@@ -77,12 +77,38 @@ end
 ## Customer Endpoints
 ### Get customer:
 ```ruby
-  client = Dcdental::Client.new
-  client.customer.get({id})
+  client = Dcdental::Client.new # or Dcdental.new
+  client.customer.get(id)
 ```
 ### response:
 ```json
-{"success": true, "result": [{"internalid": "1487367", "entityid": "ADVO", "email": "", "phone": "", "altphone": "", "fax": "", "contact": "", "altemail": ""}]}
+{"internal_id": "1487367", "entity_id": "ADVO", "email": "", "phone": "", "alt_phone": "", "fax": "", "contact": "", "alt_email": ""}
+```
+
+### Create customer:
+```ruby
+  client = Dcdental::Client.new # or Dcdental.new
+  client.customer.create({entity_status: '16',
+      entity_id: "CUST 999-999-9999", # required but can be automatically build as "CUST " + phone in format XXX-XXX-XXXX
+      company_name: 'SAMPLE COMPANY NAME', # required
+      phone: '999-999-9999', # required
+      external_id: 1
+  })
+```
+### response:
+```json
+1111111
+```
+
+### Update customer:
+```ruby
+  client = Dcdental::Client.new # or Dcdental.new
+  client.customer.update(customer_id, { entity_status: '16' })
+```
+entity status
+### response:
+```json
+1111111
 ```
 ## Contributing
 
