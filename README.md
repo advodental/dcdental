@@ -110,6 +110,87 @@ entity status
 ```json
 1111111
 ```
+
+## CustomerAddress Endpoints
+### Get customer addresses list
+#### by customer_id
+```ruby
+  client = Dcdental::Client.new # or Dcdental.new
+  client.customer_address.list(customer_id: 1)
+```
+#### by email
+```ruby
+  client = Dcdental::Client.new # or Dcdental.new
+  client.customer_address.list(email: 'example@mail.com')
+```
+This request also supports page number and page_size
+```ruby
+  client = Dcdental::Client.new # or Dcdental.new
+  client.customer_address.list(customer_id: 1, page: 1, page_size: 5)
+```
+### response:
+```json
+[{"internal_id":null, "entity_id":null, "is_residential":null, "id":null, "default_billing":null, "default_shipping":null, "label":"363 Smith Ridge Road", "attention":"", "addressee":"Joseph DeLapa", "address1":"363 Smith Ridge Road", "address2":"", "address3":null, "city": "South Salem", "state":"NY", "zipcode":"10590", "country":null, "address_phone":"", "customer_dea_number":"", "customer_state_license_number": "036262 ", "customer_state_license_expiration":"" }
+```
+### Create customer address:
+```ruby
+  client = Dcdental::Client.new # or Dcdental.new
+  client.customer.create(customer_id: 1, address: {
+      default_billing: false,   # required true/false
+      default_shipping: false,  # required true/false
+      label: "Label", # Free form text field representing the address record. If omitted, the value is set to the same as the addr1 field value.
+      addressee: "Addressee",  # required
+      attention: "Attention",  # required
+      city: "City",            # required
+      state: "ST",             # required
+      country: "US",           # required
+      zip: "99999",            # required
+      addr1: "addr1",          # required
+      addr2: "addr2",
+      addr3: "addr3",
+      addr_phone: '9999999999'
+      custrecord_state_license_number: "9999"
+      custrecord_state_license_expiration: ""
+      custrecord_dea_number: ""
+  })
+```
+### response:
+```json
+{ "entityid"=>1490168, "isresidential"=>false, "id"=>"57758181", "defaultbilling"=>true, "internalid"=>4506984, "addressid"=>"4506984", "defaultshipping"=>false, "label"=>"Label", "addrphone"=>"9999999999", "state"=>"ST", "addressee"=>"Addressee", "city"=>"City", "attention"=>"Attention", "zip"=>"99999", "country"=>"US", "addr1"=>"addr1", "addr2"=>"addr2", "addr3"=>"addr3"}
+```
+
+### Update customer address:
+```ruby
+  client = Dcdental::Client.new # or Dcdental.new
+  client.customer.create(customer_id: 1, address_id: 1, address: {
+      default_billing: false,
+      default_shipping: false,
+      label: "Label", # Free form text field representing the address record. If omitted, the value is set to the same as the addr1 field value.
+      addressee: "Addressee",
+      attention: "Attention",
+      city: "City",
+      state: "ST",
+      country: "US",
+      zip: "99999",
+      addr1: "addr1",
+      addr2: "addr2",
+      addr3: "addr3",
+      addr_phone: '9999999999'
+      custrecord_state_license_number: "9999"
+      custrecord_state_license_expiration: ""
+      custrecord_dea_number: ""
+  })
+```
+### response:
+```json
+{ "entityid"=>1490168, "isresidential"=>false, "id"=>"57758181", "defaultbilling"=>true, "internalid"=>4506984, "addressid"=>"4506984", "defaultshipping"=>false, "label"=>"Label", "addrphone"=>"9999999999", "state"=>"ST", "addressee"=>"Addressee", "city"=>"City", "attention"=>"Attention", "zip"=>"99999", "country"=>"US", "addr1"=>"addr1", "addr2"=>"addr2", "addr3"=>"addr3"}
+```
+This endpoint also supports partial update: 
+```ruby
+  client = Dcdental::Client.new # or Dcdental.new
+  client.customer.create(customer_id: 1, address_id: 1, address: { city: "City" })
+```
+Response will be the same as for general update
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/dcdental.

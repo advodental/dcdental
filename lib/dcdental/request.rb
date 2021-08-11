@@ -42,17 +42,17 @@ module Dcdental
       when Net::HTTPSuccess
         parse_success_response(response)
       when Net::HTTPUnauthorized
-        { 'error' => "#{response.message}: username and password set and correct?" }
+        raise ApiError, "#{response.message}: username and password set and correct?"
       when Net::HTTPServerError
-        { 'error' => "#{response.message}: try again later?" }
+        raise ApiError, "#{response.message}: try again later?"
       else
-        { 'error' => response.message }
+        raise ApiError, response.message
       end
     end
 
     def parse_success_response(response)
       body = JSON.parse response.body
-      return { 'error' => (body['exception']).to_s } unless body['success']
+      raise ApiError, body['exception'] unless body['success']
 
       body
     end
@@ -70,6 +70,7 @@ module Dcdental
         uri = URI(Dcdental.configuration.base_url)
         http = Net::HTTP.new uri.host, uri.port
         http.use_ssl = true
+        # http.set_debug_output($stdout)
         http
       end
     end

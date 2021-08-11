@@ -54,7 +54,7 @@ module Dcdental
         response['result'] if response['success']
       end
 
-      ## Create customer
+      ## Update customer
       # @param [Integer] or [String] internal_id # id on DCDental
       # @param [Object] customer: {
       #   entity_status # Possible values are 16 (customer lost), 13 (customer won) and 19 (customer at-risk)
@@ -72,14 +72,14 @@ module Dcdental
       def update(internal_id, customer)
         customer_hash = customer.dup.to_h
         %i[id internal_id].each { |key| customer_hash.delete(key) }
-        params = BASE_PARAMS.merge(customer_id: internal_id)
         body = {
           parameters: {
-            customer_id: internal_id
+            customerid: internal_id
           },
           body: customer_hash
         }
-        put_request(BASE_PATH, body, params)
+        response = put_request(BASE_PATH, body, BASE_PARAMS)
+        response['result'] if response['success']
       end
 
       private

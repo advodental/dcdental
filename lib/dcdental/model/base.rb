@@ -13,6 +13,14 @@ module Dcdental
           parse_item(response)
         end
       end
+
+      def self.fetch_value(item, *keys)
+        keys.each do |key|
+          value = item[key]
+          return value if value
+        end
+        nil
+      end
     end
   end
 end

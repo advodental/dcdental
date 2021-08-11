@@ -7,6 +7,8 @@ require_relative 'dcdental/configuration'
 
 # Dcdental
 module Dcdental
+  class ApiError < StandardError; end
+
   class << self
     attr_writer :configuration
   end
