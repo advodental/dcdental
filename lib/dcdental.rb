@@ -4,6 +4,8 @@ require_relative 'dcdental/version'
 require_relative 'dcdental/api'
 require_relative 'dcdental/client'
 require_relative 'dcdental/configuration'
+require_relative 'dcdental/core_ext/string'
+require_relative 'dcdental/core_ext/hash'
 
 # Dcdental
 module Dcdental

@@ -130,7 +130,7 @@ This request also supports page number and page_size
 ```
 ### response:
 ```json
-[{"internal_id":null, "entity_id":null, "is_residential":null, "id":null, "default_billing":null, "default_shipping":null, "label":"363 Smith Ridge Road", "attention":"", "addressee":"Joseph DeLapa", "address1":"363 Smith Ridge Road", "address2":"", "address3":null, "city": "South Salem", "state":"NY", "zipcode":"10590", "country":null, "address_phone":"", "customer_dea_number":"", "customer_state_license_number": "036262 ", "customer_state_license_expiration":"" }
+[{"internal_id":null, "entity_id":null, "is_residential":null, "id":null, "default_billing":null, "default_shipping":null, "label":"363 Smith Ridge Road", "attention":"", "addressee":"Joseph DeLapa", "address1":"363 Smith Ridge Road", "address2":"", "address3":null, "city": "South Salem", "state":"NY", "zipcode":"10590", "country":null, "address_phone":"", "customer_dea_number":"", "customer_state_license_number": "036262 ", "customer_state_license_expiration":"" }]
 ```
 ### Create customer address:
 ```ruby
@@ -191,6 +191,29 @@ This endpoint also supports partial update:
   client.customer.create(customer_id: 1, address_id: 1, address: { city: "City" })
 ```
 Response will be the same as for general update
+
+## Product Endpoints
+### Get products list
+#### by internal id
+```ruby
+  client = Dcdental::Client.new # or Dcdental.new
+  client.product.list(item_id: 1)
+```
+#### by array of ids
+```ruby
+  client = Dcdental::Client.new # or Dcdental.new
+  client.product.list(item_id: [1, 22])
+```
+This request also supports page number and page_size
+```ruby
+  client = Dcdental::Client.new # or Dcdental.new
+  client.product.list(page: 1, page_size: 5)
+```
+### response:
+```json
+[{"manufacturer":"3", "dcd_id":"24155", "dcd_item": "516-31642", "description":"Impregum Penta Medium Body Refill", "active_promotion":"Buy 4 Get 1 Free! (Manufacturer Fulfilled)", "availability":"Green", "pricing_unitprice": "369.40", "schein_code":"3784898", "abc":"3", "dea_required":false, "item_image_thumb":"http://www.dcdental.com/images/270118323234.01.png?resizeid=5", "item_image_full":"http://www.dcdental.com/images/270118323234.01.png", "category_lvl_i":"Impression Material", "category_lvl_ii": "Polyether", "category_lvl_iii":"Impregum" }]
+```
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/dcdental.
