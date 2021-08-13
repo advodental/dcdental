@@ -9,10 +9,12 @@ module Dcdental
     require_relative 'namespace/customer'
     require_relative 'namespace/customer_address'
     require_relative 'namespace/product'
+    require_relative 'namespace/order'
 
     namespace :auth
     namespace :customer
     namespace :customer_address
     namespace :product
+    namespace :order
   end
 end

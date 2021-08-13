@@ -46,7 +46,7 @@ module Dcdental
       when Net::HTTPServerError
         raise ApiError, "#{response.message}: try again later?"
       else
-        raise ApiError, response.message
+        raise ApiError, "#{response.message}. Body: #{response.body}"
       end
     end
 
@@ -70,7 +70,6 @@ module Dcdental
         uri = URI(Dcdental.configuration.base_url)
         http = Net::HTTP.new uri.host, uri.port
         http.use_ssl = true
-        # http.set_debug_output($stdout)
         http
       end
     end

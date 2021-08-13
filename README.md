@@ -213,7 +213,66 @@ This request also supports page number and page_size
 ```json
 [{"manufacturer":"3", "dcd_id":"24155", "dcd_item": "516-31642", "description":"Impregum Penta Medium Body Refill", "active_promotion":"Buy 4 Get 1 Free! (Manufacturer Fulfilled)", "availability":"Green", "pricing_unitprice": "369.40", "schein_code":"3784898", "abc":"3", "dea_required":false, "item_image_thumb":"http://www.dcdental.com/images/270118323234.01.png?resizeid=5", "item_image_full":"http://www.dcdental.com/images/270118323234.01.png", "category_lvl_i":"Impression Material", "category_lvl_ii": "Polyether", "category_lvl_iii":"Impregum" }]
 ```
-
+## Sales Orders Endpoints
+### Get Orders list
+#### by customer id
+```ruby
+  client = Dcdental::Client.new # or Dcdental.new
+  client.order.list(customer_id: 1)
+```
+#### by email
+```ruby
+  client = Dcdental::Client.new # or Dcdental.new
+  client.order.list(email: 'customer@email.com')
+```
+### by transaction_id
+```ruby
+  client = Dcdental::Client.new # or Dcdental.new
+  client.order.list(transaction_id: '3345CO')
+```
+#### by pagination
+```ruby
+  client = Dcdental::Client.new # or Dcdental.new
+  client.order.list(page: 1, page_size: 50) # or
+  client.order.list(page: 1) # default page_size is 50
+  # or get first page
+  client.order.list
+```
+### response:
+```json
+[{ "internal_id": "52859885", "order_type": "", "tran_date": "11/24/2020", "tran_id": "1099512SO", "entity":"504649", "memo": "", "amount": "101.61","tracking_numbers": "1Z460RY40394704213", "status_ref": "fullyBilled", "ship_date": "11/24/2020", "shipping_cost": ".00", "tax_total": "5.11", "tracking_number_links": [{"tracking_number": "1Z460RY40394704213", "link": "http://wwwapps.ups.com/WebTracking/track?track=yes&trackNums=1Z460RY40394704213" }]}]
+```
+### Get Order
+```ruby
+  client = Dcdental::Client.new # or Dcdental.new
+  client.order.by_by(1)
+```
+### response:
+```json
+{"internal_id": "53068225", "tran_date": "12/24/2020", "tran_id": "1107915SO", "entity": "1103644", "other_ref_num": "123457.0", "total": "8557.95", "status": "Pending Approval", "ship_date": "12/24/2020", "shipping_cost": "0.00", "tax_total": "0.00", line_items: [{ "line": "1", "line_unique_key": "188580698", "item": "24155", "item_display": "516-31642", "description": "Impregum Penta Medium Body Refill", "is_closed": false, "quantity": 50, "quantity_backordered": "", "quantity_billed": 0, "quantity_committed": 0, "quantity_full_filled": 0, "rate": 170.98, "amount": 8549, "custcol_item_manufacturer": "3M", "custcolcustcol_notes": "Sample notes here EC" }]
+```
+### Create order
+```ruby
+    order_params = {
+      payload_ID, # original system id, for synchronization purposes
+      entity, # required. Dcdental customer id
+      tran_date, # required. Order transaction date format MM/DD/YYYY
+      other_ref_num, # required. Purchase Order number
+      memo, # note of the order
+      ship_address_list, # required. Dcdental Ship address id
+      bill_address_list, # required. Dcdental Bill address id
+      items [ # required
+        itemid, # required. Dcdental product id
+        quantity, # required
+        rate,     # required. Unit price
+        custcolcustcol_notes # notes
+      ]
+    }
+```
+### response:
+```
+1111111
+```
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/dcdental.

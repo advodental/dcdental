@@ -14,7 +14,7 @@ module Dcdental
       BASE_PARAMS = { script: SCRIPT, deploy: DEPLOY }.freeze
 
       ## Get products by ids or by pagination
-      # @param [Integer] or [String] or [Array]
+      # @param [Integer] or [String] or [Array] item_id
       # @param [Integer] page_size = 50
       # @param [Integer] page = 1
       # @return [OpenStruct(:manufacturer, :dcd_id, :dcd_item, :description,:active_promotion,
