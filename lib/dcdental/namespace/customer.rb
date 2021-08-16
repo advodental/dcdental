@@ -14,7 +14,7 @@ module Dcdental
 
       BASE_PARAMS = { script: SCRIPT, deploy: DEPLOY }.freeze
 
-      def list(page_size: 100, page: 1)
+      def list(page_size: 5, page: 1)
         params = BASE_PARAMS.merge(pagesize: page_size, page: page)
         response = get_request(BASE_PATH, params)
         Model::Customer.from_response(response['result']) if response['success']

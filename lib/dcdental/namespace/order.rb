@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require_relative '../api'
-require_relative '../model/product'
+require_relative '../model/order'
 
 module Dcdental
   module Namespace
@@ -9,7 +9,7 @@ module Dcdental
     class Order < API
       BASE_PATH = '/app/site/hosting/restlet.nl'
       SCRIPT = 'customscript_pri_rest_salesorder'
-      DEPLOY = 'customdeploy_pri_rest_salesorder_advo4279'
+      DEPLOY = 'customdeploy_pri_rest_salesord_advo4297'
 
       BASE_PARAMS = { script: SCRIPT, deploy: DEPLOY }.freeze
 

@@ -26,7 +26,7 @@ module Dcdental
           city: fetch_value(item, 'address_city', 'city'),
           state: fetch_value(item, 'address_state', 'state'),
           zipcode: fetch_value(item, 'address_zipcode', 'zip'),
-          country: fetch_value(item, 'address_country', 'country'),
+          country: fetch_value(item, 'address_country', 'country') || 'US',
           address_phone: fetch_value(item, 'address_addressphone', 'addrphone'),
           customer_dea_number: fetch_value(item, 'address_custrecord_dea_number', 'custrecord_dea_number'),
           customer_state_license_number: fetch_value(item, 'address_custrecord_state_license_number',
