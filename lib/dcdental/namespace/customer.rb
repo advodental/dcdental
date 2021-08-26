@@ -30,6 +30,16 @@ module Dcdental
         Model::Customer.from_response((response['result'] || []).first) if response['success']
       end
 
+      ## Get customer by email
+      # @param [String] email
+      # @return OpenStruct(:internal_id, :entity_id, :phone, :email, :alt_phone, :alt_email, :fax, :contact)
+      def by_email(email)
+        params = BASE_PARAMS.merge(email: email)
+
+        response = get_request(BASE_PATH, params)
+        Model::Customer.from_response((response['result'] || []).first) if response['success']
+      end
+
       ## Create customer
       # @param [Object] customer: {
       #   entitystatus # Possible values are 16 (customer lost), 13 (customer won) and 19 (customer at-risk)

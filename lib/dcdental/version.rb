@@ -2,5 +2,5 @@
 
 # version
 module Dcdental
-  VERSION = '0.1.1.beta.1'
+  VERSION = '0.1.1.beta.2'
 end

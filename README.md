@@ -75,10 +75,15 @@ end
 {"success": true, "result": {"id": 113138, "name": "Services No Reply", "email": "services@dcdental.com", "location": 0, "department": 0, "role": 1170, "roleId": "customrole_pri_rest_service", "roleCenter": "SYSADMINCENTER", "subsidiary": 1}}
 ```
 ## Customer Endpoints
-### Get customer:
+### Get customer by id:
 ```ruby
   client = Dcdental::Client.new # or Dcdental.new
-  client.customer.get(id)
+  client.customer.by_id(id)
+```
+### Get customer by email:
+```ruby
+  client = Dcdental::Client.new # or Dcdental.new
+  client.customer.by_email("test@example.com")
 ```
 ### response:
 ```json

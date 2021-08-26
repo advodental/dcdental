@@ -8,13 +8,15 @@ class Hash
     def normalize_keys
       each_with_object({}) do |(key, value), normalized|
         normalized[key.to_s.underscore_with_space.to_sym] = case value
-                                                 when Hash
-                                                   value.normalize_keys
-                                                 when Array
-                                                   value.map { |item| item.is_a?(Hash) ? item.normalize_keys : item }
-                                                 else
-                                                   value
-                                                 end
+                                                            when Hash
+                                                              value.normalize_keys
+                                                            when Array
+                                                              value.map do |item|
+                                                                item.is_a?(Hash) ? item.normalize_keys : item
+                                                              end
+                                                            else
+                                                              value
+                                                            end
       end
     end
   end
