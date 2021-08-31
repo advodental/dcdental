@@ -39,7 +39,7 @@ module Dcdental
           line: line['line'],
           line_uniq_key: line['lineuniquekey'],
           item: line['item'],
-          item_dispay: line['item_display'],
+          item_display: line['item_display'],
           description: line['description'],
           is_closed: line['isclosed'],
           quantity: line['quantity'],
