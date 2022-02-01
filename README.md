@@ -94,7 +94,7 @@ end
 ```ruby
   client = Dcdental::Client.new # or Dcdental.new
   client.customer.create({entity_status: '16',
-      entity_id: "CUST 999-999-9999", # required but can be automatically build as "CUST " + phone in format XXX-XXX-XXXX
+      entity_id: "ADVO 999-999-9999", # required but can be automatically build as "ADVO " + phone in format XXX-XXX-XXXX
       company_name: 'SAMPLE COMPANY NAME', # required
       phone: '999-999-9999', # required
       external_id: 1
@@ -268,6 +268,7 @@ This request also supports page number and page_size
       bill_address_list, # required. Dcdental Bill address id
       items [ # required
         itemid, # required. Dcdental product id
+        description, # Dcdental product description
         quantity, # required
         rate,     # required. Unit price
         custcolcustcol_notes # notes

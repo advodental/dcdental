@@ -61,6 +61,7 @@ module Dcdental
       #   bill_address_list # required. Dcdental Bill address id
       #   items [ # required
       #     itemid # required. Dcdental product id
+      #     description # Dcdental product name
       #     quantity # required
       #     rate     # required. Unit price
       #     custcolcustcol_notes # notes

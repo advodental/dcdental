@@ -11,6 +11,7 @@ module Dcdental
       BASE_PATH = '/app/site/hosting/restlet.nl'
       SCRIPT = 'customscript_pri_rest_customer'
       DEPLOY = 'customdeploy_pri_rest_customer_advo4297'
+      ID_PREFIX = 'ADVO'
 
       BASE_PARAMS = { script: SCRIPT, deploy: DEPLOY }.freeze
 
@@ -96,7 +97,7 @@ module Dcdental
 
       def assign_default_values(customer)
         phone_number = PhoneNumber.new(customer[:phone]).to_s
-        customer[:entity_id] = "CUST #{phone_number}" unless customer.key? :entity_id
+        customer[:entity_id] = "#{ID_PREFIX} #{phone_number}" unless customer.key? :entity_id
       end
     end
   end
